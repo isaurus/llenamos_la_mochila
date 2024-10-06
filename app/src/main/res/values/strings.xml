@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LlenamosLaMochila</string>
+    <string name="lbl_contenido">Contenido:</string>
+    <string name="chk_gorras">Gorras</string>
+    <string name="chk_banyadores">Bañadores</string>
+    <string name="chk_camisetas">Camisetas</string>
+    <string name="chk_zapatos">Zapatos</string>
+    <string name="chk_pantalones">Pantalones</string>
+    <string name="chk_libros">Libros</string>
+    <string name="btn_vaciar_mochila">VACIAR MOCHILA</string>
+    <string name="txt_peso">Peso 0 Kg</string>
+</resources>
