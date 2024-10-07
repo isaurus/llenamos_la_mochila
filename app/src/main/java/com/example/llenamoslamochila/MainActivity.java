@@ -1,5 +1,6 @@
 package com.example.llenamoslamochila;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -66,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
     // Método para calcular y representar el peso del contenido de la mochila
     public void actualizarPeso(boolean isChecked, int peso) {
         pesoTotal += isChecked ? peso : -peso;
+        if (pesoTotal > 20){
+            txtPeso.setTextColor(Color.RED);
+        }else{
+            txtPeso.setTextColor(Color.BLACK);
+        }
         txtPeso.setText("Peso " + pesoTotal + " Kg");
     }
 
