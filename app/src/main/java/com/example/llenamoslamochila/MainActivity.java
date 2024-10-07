@@ -12,12 +12,19 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    // Declaración de una List<> para almacenar los CheckBox seleccionados
-    List<String> listaContenido = new ArrayList<>();
-
     // Declaración de TextView para mostrar el peso
     TextView txtPeso;
+
+    // Declaración e inicialización de constantes para representar el peso de los objetos
+    private final int pesoGorra = 1;
+    private final int pesoBanyador = 2;
+    private final int pesoCamiseta = 4;
+    private final int pesoZapato = 5;
+    private final int pesoPantalon = 5;
+    private final int pesoLibro = 10;
+
+    // Declaración de variable para actualizar el peso total de la mochila
+    private int pesoTotal;
 
     // Declaración de los objetos CheckBox
     CheckBox chkGorras, chkBanyadores, chkCamisetas, chkZapatos, chkPantalones, chkLibros;
@@ -26,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // Inicialización de TextView con el objeto XML
+        txtPeso = findViewById(R.id.txtPeso);
 
         // Inicialización de los objetos CheckBox con los objetos XML
         chkGorras = findViewById(R.id.chkGorras);
@@ -36,22 +47,22 @@ public class MainActivity extends AppCompatActivity {
         chkLibros = findViewById(R.id.chkLibros);
 
 
-        chkGorras.setOnCheckedChangeListener(v -> seleccion(v));
-        chkBanyadores.setOnCheckedChangeListener(v -> seleccion(v));
-        chkCamisetas.setOnCheckedChangeListener(v -> seleccion(v));
-        chkZapatos.setOnCheckedChangeListener(v -> seleccion(v));
-        chkPantalones.setOnCheckedChangeListener(v -> seleccion(v));
-        chkLibros.setOnCheckedChangeListener(v -> seleccion(v));
+        chkGorras.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoGorra));
+        chkBanyadores.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoBanyador));
+        chkCamisetas.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoCamiseta));
+        chkZapatos.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoZapato));
+        chkPantalones.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoPantalon));
+        chkLibros.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoLibro));
+
     }
 
-    // Método para añadir a la List<> el texto de los CheckBox
-    private void seleccion(View v){
-        CheckBox chk = (CheckBox) v;
-        String textoChkSeleccionado = chk.getText().toString();
-        if(chk.isChecked()){
-            listaContenido.add(textoChkSeleccionado);
+    // Método para calcular y representar el peso del contenido de la mochila
+    public void actualizarPeso(boolean isChecked, int peso){
+        if (isChecked){
+            pesoTotal += peso;
+
         }else{
-            listaContenido.remove(textoChkSeleccionado);
+            pesoTotal -= peso;
         }
     }
 }
