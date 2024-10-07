@@ -1,5 +1,6 @@
 package com.example.llenamoslamochila;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -66,11 +67,16 @@ public class MainActivity extends AppCompatActivity {
     public void actualizarPeso(boolean isChecked, int peso){
         if (isChecked){
             pesoTotal += peso;
-            txtPeso.setText("Peso " + pesoTotal + " Kg");
         }else{
             pesoTotal -= peso;
-            txtPeso.setText("Peso " + pesoTotal + " Kg");
         }
+
+        if (pesoTotal > 20){
+            txtPeso.setTextColor(Color.RED);
+        }else{
+            txtPeso.setTextColor(Color.BLACK);
+        }
+        txtPeso.setText("Peso " + pesoTotal + " Kg");
     }
 
     public void vaciarMochila(){
