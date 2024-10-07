@@ -1,14 +1,12 @@
 package com.example.llenamoslamochila;
 
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     // Declaración de los objetos CheckBox
     CheckBox chkGorras, chkBanyadores, chkCamisetas, chkZapatos, chkPantalones, chkLibros;
 
+    // Declaración del Button "VACIAR MOCHILA"
+    Button btnVaciarMochila;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         // Inicialización de TextView con el objeto XML
         txtPeso = findViewById(R.id.txtPeso);
 
+        // Inicialización del Button "VACIAR MOCHILA"
+        btnVaciarMochila = findViewById(R.id.btnVaciarMochila);
+
         // Inicialización de los objetos CheckBox con los objetos XML
         chkGorras = findViewById(R.id.chkGorras);
         chkBanyadores = findViewById(R.id.chkBanyadores);
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         chkPantalones = findViewById(R.id.chkPantalones);
         chkLibros = findViewById(R.id.chkLibros);
 
-
+        // Listener para los CheckButton
         chkGorras.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoGorra));
         chkBanyadores.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoBanyador));
         chkCamisetas.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoCamiseta));
@@ -54,15 +58,30 @@ public class MainActivity extends AppCompatActivity {
         chkPantalones.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoPantalon));
         chkLibros.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarPeso(isChecked, pesoLibro));
 
+        // Listener para el Button "VACIAR MOCHILA"
+        btnVaciarMochila.setOnClickListener(v -> vaciarMochila());
     }
 
     // Método para calcular y representar el peso del contenido de la mochila
     public void actualizarPeso(boolean isChecked, int peso){
         if (isChecked){
             pesoTotal += peso;
-
+            txtPeso.setText("Peso " + pesoTotal + " Kg");
         }else{
             pesoTotal -= peso;
+            txtPeso.setText("Peso " + pesoTotal + " Kg");
         }
+    }
+
+    public void vaciarMochila(){
+        chkGorras.setChecked(false);
+        chkBanyadores.setChecked(false);
+        chkCamisetas.setChecked(false);
+        chkZapatos.setChecked(false);
+        chkPantalones.setChecked(false);
+        chkLibros.setChecked(false);
+
+        pesoTotal = 0;
+        txtPeso.setText("Peso " + pesoTotal + " Kg");
     }
 }
